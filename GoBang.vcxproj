@@ -136,14 +136,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\bouncingName.h" />
     <ClInclude Include="header\draw.h" />
-    <ClInclude Include="header\music.h" />
+    <ClInclude Include="header\gameLogic.h" />
     <ClInclude Include="header\windowsCtrl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sourse\bouncingName.cpp" />
     <ClCompile Include="sourse\draw.cpp" />
+    <ClCompile Include="sourse\gameLogic.cpp" />
     <ClCompile Include="sourse\main.cpp" />
-    <ClCompile Include="sourse\music.cpp" />
     <ClCompile Include="sourse\windowsCtrl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

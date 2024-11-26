@@ -33,6 +33,7 @@ int getHelpOptionIndex();
 //有关棋盘绘制的函数
 void initBoardDraw();
 void drawBoard();
+void drawChess(int* board);
 
 #endif
 

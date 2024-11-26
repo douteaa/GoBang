@@ -1,13 +1,12 @@
 #define GLUT_DISABLE_ATEXIT_HACK
 #include "windowsCtrl.h"
+#include "bouncingName.h"
 #include "draw.h"
-#include "music.h"
-#include <Windows.h>
+#include <windows.h>
 #include <GL/glut.h>
 #include <stdio.h>
 #include <conio.h>
 #include <process.h>
-
 
 #define EXIT_PAGE -1
 #define START_MENU_PAGE 0
@@ -93,9 +92,12 @@ int main(int argc, char** argv)
 			}
 			case PROGRAMMER_PAGE:
 			{
-				HANDLE musicThread = (HANDLE)_beginthreadex(NULL, NULL, themeOfHUST, NULL, NULL, NULL);
+				system("cls");
+				HANDLE eggHandle = (HANDLE)_beginthreadex(NULL, 0, drawName, NULL, 0, NULL);
+				PlaySoundW(L".\\asset\\themeOfHUST.wav", NULL, SND_FILENAME | SND_ASYNC);
 				while (!KEY_PRESS(VK_ESCAPE));
-				CloseHandle(musicThread);
+				PlaySoundW(NULL, NULL, SND_FILENAME);
+				TerminateThread(eggHandle, 0);
 				pageIndex = HELP_PAGE;
 				break;
 			}
@@ -104,7 +106,12 @@ int main(int argc, char** argv)
 				initBoard(argc, argv);
 				initBoardDraw();
 				glutDisplayFunc(drawBoard);
+				glutMouseFunc(mouseClick);
 				glutMainLoop();
+				/*system("cls");
+				system("game.exe");
+				system("pause");
+				pageIndex = EXIT_PAGE;*/
 				break;
 			}
 		}

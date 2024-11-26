@@ -25,7 +25,10 @@
     <ClInclude Include="header\windowsCtrl.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="header\music.h">
+    <ClInclude Include="header\bouncingName.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="header\gameLogic.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -39,7 +42,10 @@
     <ClCompile Include="sourse\windowsCtrl.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sourse\music.cpp">
+    <ClCompile Include="sourse\bouncingName.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sourse\gameLogic.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

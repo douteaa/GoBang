@@ -1,5 +1,6 @@
 #define GLUT_DISABLE_ATEXIT_HACK
 #include "windowsCtrl.h"
+#include "gameLogic.h"
 #include <gl/glut.h>
 #include <stdio.h>
 
@@ -41,4 +42,18 @@ void centerPrint(HANDLE hOut, int y, const char* str)
 	int x = dwSizeX / 2 - len / 2;
 	gotoxy(hOut, x, y);
 	printf("%s", str);
+}
+
+void mouseClick(int button, int state, int mouseX, int mouseY)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		int gridX = (mouseX - BOARD_MARGIN + BOARD_GRID_SIZE / 2) / BOARD_GRID_SIZE;
+		int gridY = (mouseY - BOARD_MARGIN + BOARD_GRID_SIZE / 2) / BOARD_GRID_SIZE;
+		printf("Mouse right click at (%d, %d)\n", gridX, gridY);
+	}
+	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	{
+		printf("Mouse right click at (%d, %d)\n", mouseX, mouseY);
+	}
 }

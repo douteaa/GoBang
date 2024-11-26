@@ -40,6 +40,8 @@ const char helpPageOption[2][39] = { "-> 返回开始菜单          制作人员     ",
 
 //有关棋盘的变量
 cv::Mat boardImage;
+cv::Mat blackChessImage;
+cv::Mat whiteChessImage;
 
 void drawStartMenuPage()
 {
@@ -90,20 +92,30 @@ void initBoardDraw()
 {
 	boardImage = cv::imread(".\\asset\\board.png", cv::IMREAD_UNCHANGED);
 	cv::cvtColor(boardImage, boardImage, cv::COLOR_BGRA2RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, boardImage.cols, boardImage.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, boardImage.data);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glEnable(GL_TEXTURE_2D);
+	blackChessImage = cv::imread(".\\asset\\blackChess.png", cv::IMREAD_UNCHANGED);
+	cv::cvtColor(blackChessImage, blackChessImage, cv::COLOR_BGRA2RGBA);
+	whiteChessImage = cv::imread(".\\asset\\whiteChess.png", cv::IMREAD_UNCHANGED);
+	cv::cvtColor(whiteChessImage, whiteChessImage, cv::COLOR_BGRA2RGBA);
 }
 
 void drawBoard()
 {
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, boardImage.cols, boardImage.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, boardImage.data);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0); glVertex3f(-1.0, 1.0, 0.0);
 	glTexCoord2f(0.0, 1.0); glVertex3f(-1.0, -1.0, 0.0);
 	glTexCoord2f(1.0, 1.0); glVertex3f(1.0, -1.0, 0.0);
 	glTexCoord2f(1.0, 0.0); glVertex3f(1.0, 1.0, 0.0);
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 	glFlush();
 	glutSwapBuffers();
+}
+
+void drawChess(int* board)
+{
+
 }
