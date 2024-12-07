@@ -101,15 +101,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\opencv\opencv\build\include\opencv2;D:\opencv\opencv\build\include;D:\Study\GoBang\header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\opencv\opencv\build\include\opencv2;D:\opencv\opencv\build\include;D:\Study\GoBang\header;D:\Study\GoBang\header\fiveChessAI;D:\Study\GoBang\packages\libhv.1.3.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world490d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\opencv\opencv\build\x64\vc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world490d.lib;hv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\opencv\opencv\build\x64\vc16\lib;D:\Study\GoBang\packages\libhv.1.3.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Study\GoBang\header;D:\opencv\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Study\GoBang\header;D:\opencv\opencv\build\include;D:\Study\GoBang\header\fiveChessAI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,15 +138,27 @@
   <ItemGroup>
     <ClInclude Include="header\bouncingName.h" />
     <ClInclude Include="header\draw.h" />
+    <ClInclude Include="header\fiveChessAI\ACSearcher.h" />
+    <ClInclude Include="header\fiveChessAI\ChessEngine.h" />
+    <ClInclude Include="header\fiveChessAI\PossiblePositionManager.h" />
     <ClInclude Include="header\gameLogic.h" />
+    <ClInclude Include="header\mainDefine.h" />
+    <ClInclude Include="header\soundPlay.h" />
     <ClInclude Include="header\windowsCtrl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourse\bouncingName.cpp" />
     <ClCompile Include="sourse\draw.cpp" />
+    <ClCompile Include="sourse\fiveChessAI\ACSearcher.cpp" />
+    <ClCompile Include="sourse\fiveChessAI\ChessEngine.cpp" />
+    <ClCompile Include="sourse\fiveChessAI\PossiblePositionManager.cpp" />
     <ClCompile Include="sourse\gameLogic.cpp" />
     <ClCompile Include="sourse\main.cpp" />
+    <ClCompile Include="sourse\soundPlay.cpp" />
     <ClCompile Include="sourse\windowsCtrl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="asset\goBang.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

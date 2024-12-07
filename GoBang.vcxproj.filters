@@ -31,6 +31,21 @@
     <ClInclude Include="header\gameLogic.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="header\soundPlay.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="header\fiveChessAI\ACSearcher.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="header\fiveChessAI\ChessEngine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="header\fiveChessAI\PossiblePositionManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="header\mainDefine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourse\draw.cpp">
@@ -48,5 +63,22 @@
     <ClCompile Include="sourse\gameLogic.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="sourse\soundPlay.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sourse\fiveChessAI\ACSearcher.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sourse\fiveChessAI\ChessEngine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sourse\fiveChessAI\PossiblePositionManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="asset\goBang.ico">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

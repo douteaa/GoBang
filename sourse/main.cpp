@@ -2,20 +2,19 @@
 #include "windowsCtrl.h"
 #include "bouncingName.h"
 #include "draw.h"
-#include <windows.h>
+#include "gameLogic.h"
+#include "soundPlay.h"
+#include "mainDefine.h"
+#include <Windows.h>
 #include <GL/glut.h>
 #include <stdio.h>
 #include <conio.h>
 #include <process.h>
 
-#define EXIT_PAGE -1
-#define START_MENU_PAGE 0
-#define HELP_PAGE 1
-#define PROGRAMMER_PAGE 2
-#define GAME_PAGE 3
-
-int onGame = true;
-int pageIndex = START_MENU_PAGE;
+int onGame = true;                 // 判断游戏是否继续
+int pageIndex = START_MENU_PAGE;   // 当前页面的索引
+int gameEnd;                       // 判断游戏是否结束
+int exitFlag;                      // 菜单进程退出标志
 
 int main(int argc, char** argv)
 {
@@ -25,14 +24,15 @@ int main(int argc, char** argv)
 		{
 			case EXIT_PAGE:
 			{
-				system("cls");
-				exit(0);
+				system("cls"); // 清屏
+				exit(0);  // 退出
 			}
 			case START_MENU_PAGE:
 			{
 				system("cls");
 				initWindows();
 				drawStartMenuPage();
+				// 按回车键确定选择
 				while (!KEY_PRESS(VK_RETURN))
 				{
 					if (KEY_PRESS(VK_UP))
@@ -47,10 +47,11 @@ int main(int argc, char** argv)
 					}
 					Sleep(100);
 				}
+				// 根据索引切换页面
 				switch (getStartMenuOptionIndex())
 				{
 				case START_MENU_START_OPTION:
-					pageIndex = GAME_PAGE;
+					pageIndex = GAME_SETTING_PAGE;
 					break;
 				case START_MENU_HELP_OPTION:
 					pageIndex = HELP_PAGE;
@@ -65,6 +66,7 @@ int main(int argc, char** argv)
 			{
 				system("cls");
 				drawHelpPage();
+				// 按回车键确定选择
 				while (!KEY_PRESS(VK_RETURN))
 				{
 					if (KEY_PRESS(VK_LEFT))
@@ -79,6 +81,7 @@ int main(int argc, char** argv)
 					}
 					Sleep(100);
 				}
+				// 根据选项索引切换页面
 				switch (getHelpOptionIndex())
 				{
 				case HELP_PAGE_RETURN_OPTION:
@@ -93,25 +96,83 @@ int main(int argc, char** argv)
 			case PROGRAMMER_PAGE:
 			{
 				system("cls");
+				initName();
+				exitFlag = 0;
 				HANDLE eggHandle = (HANDLE)_beginthreadex(NULL, 0, drawName, NULL, 0, NULL);
-				PlaySoundW(L".\\asset\\themeOfHUST.wav", NULL, SND_FILENAME | SND_ASYNC);
-				while (!KEY_PRESS(VK_ESCAPE));
-				PlaySoundW(NULL, NULL, SND_FILENAME);
-				TerminateThread(eggHandle, 0);
+				programmerBGM(MUSIC_START);
+				while (!KEY_PRESS(VK_ESCAPE));  // 运行直至按下Esc键
+				programmerBGM(MUSIC_END);
+				exitFlag = 1;
 				pageIndex = HELP_PAGE;
+				break;
+			}
+			case GAME_SETTING_PAGE:
+			{
+				int returnKey = false; // 判断是否返回游戏开始界面
+				system("cls");
+				drawGameSettingPage();
+				// 按下回车键确定选择
+				while (!KEY_PRESS(VK_RETURN))
+				{
+					if (KEY_PRESS(VK_LEFT))
+					{
+						setGameSettingOptionInnerIndex(OPTION_LEFT);
+						drawGameSettingPage();
+					}
+					else if (KEY_PRESS(VK_RIGHT))
+					{
+						setGameSettingOptionInnerIndex(OPTION_RIGHT);
+						drawGameSettingPage();
+					}
+					else if (KEY_PRESS(VK_UP))
+					{
+						setGameSettingOptionIndex(OPTION_UP);
+						drawGameSettingPage();
+					}
+					else if (KEY_PRESS(VK_DOWN))
+					{
+						setGameSettingOptionIndex(OPTION_DOWN);
+						drawGameSettingPage();
+					}
+					else if (KEY_PRESS(VK_ESCAPE))
+					{
+						returnKey = 1;
+						break;
+					}
+					else 
+						Sleep(100);
+				}
+				// 根据选择情况切换页面
+				if (returnKey)
+				{
+					pageIndex = START_MENU_PAGE;
+					break;
+				}
+				else
+				{
+					pageIndex = GAME_PAGE;
+					setGame(getGameMode(), getColorTaken(), getDifficult());
+				}
 				break;
 			}
 			case GAME_PAGE:
 			{
-				initBoard(argc, argv);
-				initBoardDraw();
-				glutDisplayFunc(drawBoard);
-				glutMouseFunc(mouseClick);
-				glutMainLoop();
-				/*system("cls");
-				system("game.exe");
-				system("pause");
-				pageIndex = EXIT_PAGE;*/
+				system("cls");
+				gameEnd = false;
+				initGame();                                       // 初始化游戏
+				initBoard(argc, argv);                            // 初始化棋盘
+				initTexture();                                    // 加载材质
+				glutReshapeFunc([](int width, int height) {
+					glutReshapeWindow(BOARD_WIDTH, BOARD_HEIGHT); // 设置窗口大小
+				});                                               // 设置窗口大小变化事件回调函数
+				glutDisplayFunc(drawGamePage);                    // 设置窗口重绘回调函数
+				glutMouseFunc(mouseClick);                        // 设置鼠标点击事件回调函数
+				mouseMotionInit();                                // 初始化鼠标移动事件变量
+				glutPassiveMotionFunc(mouseMotion);               // 设置鼠标事件回调函数
+				glutKeyboardFunc(keyboardCtrl);                   // 设置键盘事件回调函数
+				glutMainLoop();                                   // 进入GLUT事件主循环
+				pageIndex = GAME_SETTING_PAGE;
+				gameEnd = true;
 				break;
 			}
 		}
