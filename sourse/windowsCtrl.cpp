@@ -67,20 +67,6 @@ void mouseClick(int button, int state, int mouseX, int mouseY)
 			placeChess(gridX, gridY, currentPlayer);  // 下棋
 		
 	}
-	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-	{
-		int gridX = (mouseX - BOARD_MARGIN + BOARD_GRID_SIZE / 2) / BOARD_GRID_SIZE;
-		int gridY = (mouseY - BOARD_MARGIN + BOARD_GRID_SIZE / 2) / BOARD_GRID_SIZE;
-		if (gridX >= 0 && gridX < BOARD_SIZE && gridY >= 0 && gridY < BOARD_SIZE)
-		{
-			// 悔棋
-			takeBackChess();
-			if (gameMode == HUMAN_AI_BATTLE_MODE && difficult == MASTER_AI)
-			{
-				ChessEngine::takeBack();
-			}
-		}
-	}
 }
 
 void mouseMotionInit()
@@ -120,9 +106,8 @@ void keyboardCtrl(unsigned char key, int x, int y)
 				extern int gameMode;
 				if (gameMode == HUMAN_AI_BATTLE_MODE && difficult == MASTER_AI)
 					ChessEngine::reset(colorTaken == 1 ? 1 : 0);
-				clearBoard(); // 清空棋盘
+				gameEnd = 0;
 				initGame(); // 初始化游戏
-				gameEnd = 0;  // 退出电脑AI进程
 				break;
 			}
 			case 'q':
@@ -131,5 +116,24 @@ void keyboardCtrl(unsigned char key, int x, int y)
 				break;
 			}
 		}
+	}
+}
+
+void menuFunc(int index)
+{
+	if (index == 1)
+	{
+		extern int gameMode;
+		extern int difficult;
+		// 悔棋
+		takeBackChess();
+		if (gameMode == HUMAN_AI_BATTLE_MODE && difficult == MASTER_AI)
+		{
+			ChessEngine::takeBack();
+		}
+	}
+	else if (index == 2)
+	{
+		glutLeaveMainLoop();  // 退出GLUT事件循环
 	}
 }

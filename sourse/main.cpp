@@ -170,6 +170,10 @@ int main(int argc, char** argv)
 				mouseMotionInit();                                // 初始化鼠标移动事件变量
 				glutPassiveMotionFunc(mouseMotion);               // 设置鼠标事件回调函数
 				glutKeyboardFunc(keyboardCtrl);                   // 设置键盘事件回调函数
+				glutCreateMenu(menuFunc);
+				glutAddMenuEntry("Take Back", 1);
+				glutAddMenuEntry("Give Up", 2);
+				glutAttachMenu(GLUT_RIGHT_BUTTON);
 				glutMainLoop();                                   // 进入GLUT事件主循环
 				pageIndex = GAME_SETTING_PAGE;
 				gameEnd = true;

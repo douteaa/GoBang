@@ -27,5 +27,6 @@ void mouseClick(int button, int state, int mouseX, int mouseY);   // Êó±êµã»÷»Øµ
 void mouseMotion(int mouseX, int mouseY);                         // Êó±êÒÆ¶¯»Øµ÷º¯Êı
 void mouseMotionInit();                                           // Êó±êÒÆ¶¯Ïà¹Ø³õÊ¼»¯
 void keyboardCtrl(unsigned char key, int x, int y);               // ¼üÅÌÊäÈë»Øµ÷º¯Êı
+void menuFunc(int index);
 
 #endif
