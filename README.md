@@ -1,4 +1,4 @@
-## 简单的五子棋游戏
+# 简单的五子棋游戏
 
 [![Windows](https://badgen.net/badge/Windows/success/green?icon=github)](https://github.com/ithewei/libhv/actions/workflows/CI.yml?query=branch%3Amaster)
 
@@ -6,7 +6,7 @@
 
 这是一个简单的五子棋游戏，使用 `OpenGL, GLUT`绘制游戏游戏的图形界面以及通过键盘和鼠标事件控制游戏流程。游戏启动器使用windows的控制台，涉及到`WinAPI`的使用，因此无法在Linux上运行。
 
-#### ✨ 特点
+## ✨ 特点
 
 - 包含完整的游戏流程，包括游戏设置，下棋，悔棋，结算等；
 
@@ -17,7 +17,7 @@
 - 游戏进行时控制台有日志输出；
 - ~~包含彩蛋。~~
 
-#### ⚡️ 开始
+## ⚡️ 开始
 
 1. 解压下载到的安装包；
 2. 双击`GoBang.exe`运行游戏；
@@ -26,7 +26,7 @@
 5. 游戏结束后按`r`键重新开始，按`q`键退出到游戏设置页面；
 6. 享受您的游戏之旅吧！
 
-#### ⌛️ 构建
+## ⌛️ 构建
 
 1. 打开`Visual Studio`，选择`克隆存储库`选项，在`存储库位置`填入`https://github.com/douteaa/GoBang.git`，选择好项目路径后点击`克隆`按钮，完成项目的导入；
 
@@ -34,7 +34,7 @@
 
 3. 生成并调试吧！
 
-#### 🍭部分游戏画面
+## 🍭部分游戏画面
 
 ![startMenu](img/statrMenu.png)
 
