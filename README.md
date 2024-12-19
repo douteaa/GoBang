@@ -1,7 +1,6 @@
 # 简单的五子棋游戏
 
 [![Windows](https://badgen.net/badge/Windows/success/green?icon=github)](https://github.com/ithewei/libhv/actions/workflows/CI.yml?query=branch%3Amaster)
-
 <br>
 
 [![release](https://badgen.net/github/release/douteaa/GoBang?icon=github)](https://github.com/douteaa/GoBang/releases)
@@ -10,7 +9,6 @@
 [![issues](https://badgen.net/github/issues/douteaa/GoBang?icon=github)](https://github.com/douteaa/GoBang/issues)
 [![PRs](https://badgen.net/github/prs/douteaa/GoBang?icon=github)](https://github.com/douteaa/GoBang/pulls)
 [![contributors](https://badgen.net/github/contributors/douteaa/GoBang?icon=github)](https://github.com/douteaa/GoBang/contributors)
-
 <br>
 
 这是一个简单的五子棋游戏，使用 `OpenGL, GLUT`绘制游戏游戏的图形界面以及通过键盘和鼠标事件控制游戏流程。游戏启动器使用windows的控制台，涉及到`WinAPI`的使用，因此无法在Linux上运行。
