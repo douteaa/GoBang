@@ -15,7 +15,7 @@ struct
 	int vx;
 	int vy;
 	WORD color;
-} programmer[PROGRAMMER_NUM]; // ´æ´¢ÖÆ×÷ÈËÔ±µÄ½á¹¹Ìå
+} programmer[PROGRAMMER_NUM]; // å­˜å‚¨åˆ¶ä½œäººå‘˜çš„ç»“æ„ä½“
 
 void initName()
 {
@@ -23,7 +23,7 @@ void initName()
 	CONSOLE_SCREEN_BUFFER_INFO bInfo;
 	GetConsoleScreenBufferInfo(hOutput, &bInfo);
 	int dwSizeX = bInfo.dwSize.X;
-	int dwSizeY = bInfo.dwSize.Y;  // »ñÈ¡µ±Ç°¿ØÖÆÌ¨´óĞ¡
+	int dwSizeY = bInfo.dwSize.Y;  // è·å–å½“å‰æ§åˆ¶å°å¤§å°
 	srand(time(NULL));
 	for (int i = 0; i < PROGRAMMER_NUM; i++)
 	{
@@ -31,28 +31,28 @@ void initName()
 		do {
 			vx = rand() % MAX_SPEED_INTERVAL - MAX_SPEED_INTERVAL / 2;
 			vy = rand() % MAX_SPEED_INTERVAL - MAX_SPEED_INTERVAL / 2;
-		} while (vx == 0 || vy == 0);  // È·±£ vx ºÍ vy ¶¼²»ÎªÁã
+		} while (vx == 0 || vy == 0);  // ç¡®ä¿ vx å’Œ vy éƒ½ä¸ä¸ºé›¶
 
-		programmer[i] = { "ÌïÂ¶ÌÎ", rand() % (dwSizeX - 4), rand() % dwSizeY, vx, vy, FOREGROUND_RED | FOREGROUND_INTENSITY };
+		programmer[i] = { "XXX", rand() % (dwSizeX - 4), rand() % dwSizeY, vx, vy, FOREGROUND_RED | FOREGROUND_INTENSITY };
 	}
-	programmer[0].name = "ÌïÂ¶ÌÎ";
-	programmer[1].name = "ÁÖÒæ½Ü";
-	programmer[2].name = "²ÌÁÖî£";
+	programmer[0].name = "XXX";
+	programmer[1].name = "XXX";
+	programmer[2].name = "XXX";
 	programmer[1].color = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	programmer[2].color = FOREGROUND_BLUE | FOREGROUND_INTENSITY;  // ¿ØÖÆÖÆ×÷ÈËÔ±µÄÑÕÉ«
+	programmer[2].color = FOREGROUND_BLUE | FOREGROUND_INTENSITY;  // æ§åˆ¶åˆ¶ä½œäººå‘˜çš„é¢œè‰²
 }
 
 unsigned int WINAPI drawName(void* pParam)
 {
-	extern int exitFlag;  // ½ø³ÌÍË³ö±êÖ¾
+	extern int exitFlag;  // è¿›ç¨‹é€€å‡ºæ ‡å¿—
 	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO bInfo;
 	GetConsoleScreenBufferInfo(hOutput, &bInfo);
 	int dwSizeX = bInfo.dwSize.X;
-	int dwSizeY = bInfo.dwSize.Y;  // »ñÈ¡µ±Ç°¿ØÖÆÌ¨´óĞ¡
+	int dwSizeY = bInfo.dwSize.Y;  // è·å–å½“å‰æ§åˆ¶å°å¤§å°
 	while (true)
 	{
-		// Çå³ıÖ®Ç°µÄÎ»ÖÃ
+		// æ¸…é™¤ä¹‹å‰çš„ä½ç½®
 		for (int i = 0; i < PROGRAMMER_NUM; i++)
 		{
 			gotoxy(hOutput, programmer[i].x, programmer[i].y);
@@ -62,7 +62,7 @@ unsigned int WINAPI drawName(void* pParam)
 			}
 		}
 
-		// ¸üĞÂÎ»ÖÃºÍËÙ¶È
+		// æ›´æ–°ä½ç½®å’Œé€Ÿåº¦
 		for (int i = 0; i < PROGRAMMER_NUM; i++)
 		{
 			programmer[i].x += programmer[i].vx;
@@ -79,14 +79,14 @@ unsigned int WINAPI drawName(void* pParam)
 			}
 		}
 
-		// ¼ì²âÅö×²
+		// æ£€æµ‹ç¢°æ’
 		for (int i = 0; i < PROGRAMMER_NUM; i++)
 		{
 			for (int j = i + 1; j < PROGRAMMER_NUM; j++)
 			{
 				if (abs(programmer[i].x - programmer[j].x) <= 4 && abs(programmer[i].y - programmer[j].y) <= 2)
 				{
-					// ½»»»ËÙ¶È·½Ïò
+					// äº¤æ¢é€Ÿåº¦æ–¹å‘
 					int tempVx = programmer[i].vx;
 					int tempVy = programmer[i].vy;
 					programmer[i].vx = programmer[j].vx;
@@ -97,7 +97,7 @@ unsigned int WINAPI drawName(void* pParam)
 			}
 		}
 
-		// »æÖÆĞÂµÄÎ»ÖÃ
+		// ç»˜åˆ¶æ–°çš„ä½ç½®
 		for (int i = 0; i < PROGRAMMER_NUM; i++)
 		{
 			SetConsoleTextAttribute(hOutput, programmer[i].color);
@@ -105,14 +105,14 @@ unsigned int WINAPI drawName(void* pParam)
 			printf("%s", programmer[i].name);
 		}
 
-		// »Ö¸´Ä¬ÈÏÑÕÉ«
+		// æ¢å¤é»˜è®¤é¢œè‰²
 		SetConsoleTextAttribute(hOutput, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
-		Sleep(100);  // ¿ØÖÆ¶¯»­¿ìÂı
+		Sleep(100);  // æ§åˆ¶åŠ¨ç”»å¿«æ…¢
 
 		if (exitFlag)
 		{
-			ExitThread(0);  // ÍË³ö½ø³ÌÊÍ·Å×ÊÔ´
+			ExitThread(0);  // é€€å‡ºè¿›ç¨‹é‡Šæ”¾èµ„æº
 		}
 	}
 	return 0;
